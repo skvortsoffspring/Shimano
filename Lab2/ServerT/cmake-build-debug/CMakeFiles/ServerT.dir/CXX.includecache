@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/GitHub/Shimano/Lab2/ServerT/Error.h
+
+D:/GitHub/Shimano/Lab2/ServerT/main.cpp
+string
+-
+iostream
+-
+Winsock2.h
+D:/GitHub/Shimano/Lab2/ServerT/Winsock2.h
+Error.h
+D:/GitHub/Shimano/Lab2/ServerT/Error.h
+ctime
+-
+
