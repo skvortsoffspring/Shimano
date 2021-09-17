@@ -1,9 +1,7 @@
-#define _WINSOCK_DEPRECATED_NO_WARNING
-
 #include <string>
 #include <iostream>
-#include "Winsock2.h" //çàãîëîâîê WS2_32.dll
-#pragma comment(lib, "WS2_32.lib") //ýêñïîðò WS2_32.dll
+#include "Winsock2.h"
+#pragma comment(lib, "WS2_32.lib")
 #include "Error.h"
 #include <ctime>
 
@@ -18,7 +16,7 @@ int main()
 
     SOCKADDR_IN serv;                           //параметры сокета sS
     serv.sin_family = AF_INET;                  //тип сетевого адреса
-    serv.sin_port = htons(2000);        //порт 2000
+    serv.sin_port = htons(2000);       //порт 2000
     serv.sin_addr.s_addr = INADDR_ANY;          //любой адрес для привязки (можно использовать INADDR_LOOPBACK (127.0.0.1)
 
     SOCKET cS;                                  //создание канала на стороне сервера и создание сокета для обмена данными по этому каналу
@@ -34,7 +32,7 @@ int main()
         if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0) // инициализация библиотеки (MAKEWORD информация о версии, т.е используем сокет 2.0)
             throw SetErrorMsgText("startup: ", WSAGetLastError());
 
-        if ((sS = socket(AF_INET, SOCK_STREAM, NULL)) == INVALID_SOCKET)    // создаем сокет (AF_INET для протокола ipv4, SOCK_STREAM - TCP, null - для протокола транспортного уровня)
+        if ((sS = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)    // создаем сокет (AF_INET для протокола ipv4, SOCK_STREAM - TCP, null - для протокола транспортного уровня)
             throw SetErrorMsgText("socket: ", WSAGetLastError());
 
         if (bind(sS, (LPSOCKADDR)&serv, sizeof(serv)) == SOCKET_ERROR)      // связываем сокет и данные структуры SOCKADDR_IN
@@ -53,12 +51,12 @@ int main()
             while (true)
             {
                 start = clock();                                                                //начало измерения
-                if ((libuf = recv(cS, ibuf, sizeof(ibuf), NULL)) == SOCKET_ERROR)               //получение сообщения (сокет клиента, буффер ввода, индикатор особого режима маршрутизатора)
+                if ((libuf = recv(cS, ibuf, sizeof(ibuf), 0)) == SOCKET_ERROR)               //получение сообщения (сокет клиента, буффер ввода, индикатор особого режима маршрутизатора)
                     throw SetErrorMsgText("recv: ", WSAGetLastError());
 
                 string obuf = ibuf;
 
-                if ((lobuf = send(cS, obuf.c_str(), strlen(obuf.c_str()) + 1, NULL)) == SOCKET_ERROR)   //получение сообщения (сокет клиента, буффер выводы, индикатор особого режима маршрутизатора)
+                if ((lobuf = send(cS, obuf.c_str(), strlen(obuf.c_str()) + 1, 0)) == SOCKET_ERROR)   //получение сообщения (сокет клиента, буффер выводы, индикатор особого режима маршрутизатора)
                     throw SetErrorMsgText("send: ", WSAGetLastError());
 
                 cout << ibuf << endl;
@@ -86,6 +84,5 @@ int main()
         cout << endl << errorMsgText << endl;
     }
 
-    system("pause");
     return 0;
 }
