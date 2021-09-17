@@ -27,6 +27,7 @@ int main()
     char ibuf[50];                              //буфер ввода
     int libuf = 0;                              //количество принятых байт
     int lobuf = 0;                              //количество отправленных байт
+    bool exit = false;
     try
     {
         if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0) // инициализация библиотеки (MAKEWORD информация о версии, т.е используем сокет 2.0)
@@ -50,6 +51,7 @@ int main()
 
             while (true)
             {
+
                 start = clock();                                                                //начало измерения
                 if ((libuf = recv(cS, ibuf, sizeof(ibuf), 0)) == SOCKET_ERROR)               //получение сообщения (сокет клиента, буффер ввода, индикатор особого режима маршрутизатора)
                     throw SetErrorMsgText("recv: ", WSAGetLastError());
@@ -60,16 +62,18 @@ int main()
                     throw SetErrorMsgText("send: ", WSAGetLastError());
 
                 cout << ibuf << endl;
-
-                if (strcmp(ibuf, "") == 0)
-                    break;
+                if(exit) break;
+                if (strcmp(ibuf, "") == 0){
+                    exit = true;
+                }
 
                 stop = clock();
                 cout << "time: " << ((stop - start)) << endl;
             }
-            if (strcmp(ibuf, "") == 0)
-                break;
 
+            if (strcmp(ibuf, "exit") == 0)
+                break;
+            exit = false;
         } while (true);
 
         if (closesocket(sS) == SOCKET_ERROR)

@@ -5,8 +5,9 @@
 #include "Error.h"
 #include <ctime>
 
-#define COUNT 100
+#define COUNT 1000
 #define LOCALHOST
+//#define EXIT
 
 using namespace std;
 
@@ -43,8 +44,6 @@ int main()
 
         if ((connect(cC, (sockaddr*)&serv, sizeof(serv))) == SOCKET_ERROR)
             throw SetErrorMsgText("connect: ", WSAGetLastError());
-        int count;
-
 
         for (int i = 1; i <= COUNT; i++)
         {
@@ -55,10 +54,19 @@ int main()
                 throw SetErrorMsgText("recv: ", WSAGetLastError());
             cout << ibuf << endl;
         }
-
-        string obuf = "";
-        if ((lobuf = send(cC, obuf.c_str(), strlen(obuf.c_str()) + 1, 0)) == SOCKET_ERROR)
+        string str = "";
+        if ((lobuf = send(cC, str.c_str(), 1, 0)) == SOCKET_ERROR)
             throw SetErrorMsgText("send: ", WSAGetLastError());
+        if ((libuf = recv(cC, ibuf, sizeof(ibuf), 0)) == SOCKET_ERROR)
+            throw SetErrorMsgText("recv: ", WSAGetLastError());
+
+#ifdef EXIT
+        string obuf2;           // = "exit";
+        cout << "enter \"exit\" for close server\n>> ";
+        cin >> obuf2;
+        if ((lobuf = send(cC, obuf2.c_str(), strlen(obuf2.c_str()) + 1, 0)) == SOCKET_ERROR)
+            throw SetErrorMsgText("send: ", WSAGetLastError());
+#endif
 
         if (closesocket(cC) == SOCKET_ERROR)
             throw SetErrorMsgText("closesocket: ", WSAGetLastError());
