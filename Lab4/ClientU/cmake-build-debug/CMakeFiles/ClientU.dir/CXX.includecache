@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/GitHub/Shimano/Lab4/ClientU/headers/Error.h
+string
+D:/GitHub/Shimano/Lab4/ClientU/headers/string
+
+D:/GitHub/Shimano/Lab4/ClientU/headers/service.h
+
+D:/GitHub/Shimano/Lab4/ClientU/source/main.cpp
+string
+-
+iostream
+-
+Winsock2.h
+D:/GitHub/Shimano/Lab4/ClientU/source/Winsock2.h
+../headers/Error.h
+D:/GitHub/Shimano/Lab4/ClientU/headers/Error.h
+../headers/service.h
+D:/GitHub/Shimano/Lab4/ClientU/headers/service.h
+

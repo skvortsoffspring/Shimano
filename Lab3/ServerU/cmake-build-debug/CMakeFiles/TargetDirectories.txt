@@ -1,0 +1,3 @@
+D:/GitHub/Shimano/Lab3/ServerU/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/GitHub/Shimano/Lab3/ServerU/cmake-build-debug/CMakeFiles/ServerU.dir
+D:/GitHub/Shimano/Lab3/ServerU/cmake-build-debug/CMakeFiles/edit_cache.dir

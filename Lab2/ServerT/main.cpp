@@ -30,13 +30,13 @@ int main()
     bool exit = false;
     try
     {
-        if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0) // инициализация библиотеки (MAKEWORD информация о версии, т.е используем сокет 2.0)
+        if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0)      // инициализация библиотеки (MAKEWORD информация о версии, т.е используем сокет 2.0)
             throw SetErrorMsgText("startup: ", WSAGetLastError());
 
         if ((sS = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)    // создаем сокет (AF_INET для протокола ipv4, SOCK_STREAM - TCP, null - для протокола транспортного уровня)
             throw SetErrorMsgText("socket: ", WSAGetLastError());
 
-        if (bind(sS, (LPSOCKADDR)&serv, sizeof(serv)) == SOCKET_ERROR)      // связываем сокет и данные структуры SOCKADDR_IN
+        if (bind(sS, (LPSOCKADDR)&serv, sizeof(serv)) == SOCKET_ERROR)          // связываем сокет и данные структуры SOCKADDR_IN
             throw SetErrorMsgText("bind: ", WSAGetLastError());
 
         if (listen(sS, SOMAXCONN) == SOCKET_ERROR)                          // устанавливаем сокет в режим прослуживания (сокет, SOMAXCONN (2147483647) - количество возможных
@@ -44,6 +44,7 @@ int main()
 
         do
         {
+            cout << "I listen!" << endl;
             if ((cS = accept(sS, (sockaddr*)&clnt, &lclnt)) == INVALID_SOCKET)      //метод для ожидания подключения клиентов (сокет, структура параметров подключения, размер структуры SOCKADDR_IN)
                 throw SetErrorMsgText("accept: ", WSAGetLastError());
 
