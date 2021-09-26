@@ -41,6 +41,7 @@ bool  GetRequestFromClient(SOCKET sS, char *name, short port, SOCKADDR_IN *clien
         destroy(&sS);
     }else {
         cout << "Rejected" << endl;
+        PutAnswerToClient(sS, (char*)"", client_addr, flen);
         return false;
     }
 }

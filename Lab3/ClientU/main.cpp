@@ -5,12 +5,14 @@
 #include "Error.h"
 #include <cstdlib>
 
-#define COUNT 1000
+#define COUNT 10000
 #define LOCALHOST                       // закомментировать для использования адреса (не петли)
 #define LOCAL_ADDRESS "192.168.0.100"   // адрес компьютера в локальной сети
 #define MAX_MESSAGE 50
 #define PORT 2000
-//#define EXIT                            // раскомментировать для выключения сервера
+#define EXIT                            // раскомментировать для выключения сервера
+#define PACKET_LOSS                       // тест потери пакетов
+
 
 using namespace std;
 
@@ -49,6 +51,8 @@ int main()
         if ((cS = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET)
             throw SetErrorMsgText("socket: ", WSAGetLastError());
 
+        cout << "Will " <<  COUNT <<  "send packages" << endl;
+
         for (int i = 1; i <= COUNT; i++)
         {
 
@@ -59,12 +63,13 @@ int main()
             lobuf = sendto(cS, (char *)obuf, MAX_MESSAGE, 0, (sockaddr *) &clnt, lc);
             if (lobuf == SOCKET_ERROR)
                 throw SetErrorMsgText("send:", WSAGetLastError());
-
+#ifndef  PACKET_LOSS
             lb = recvfrom(cS, ibuf, MAX_MESSAGE, 0, (sockaddr *) &clnt, &lc);
             if (lb == SOCKET_ERROR)
                 throw  SetErrorMsgText("recv:",WSAGetLastError());
 
             cout << ibuf << endl;
+#endif
         }
 
 

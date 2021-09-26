@@ -48,9 +48,14 @@ int main()
             throw SetErrorMsgText("opt: ", WSAGetLastError());
 
         strcpy(buffer, MESSAGE);
+        while(strcmp(buffer, (char*)"exit") !=0) {
 
-        succes = GetServer(&cS, buffer, PORT, &clnt, &lc);
+            cout << "Enter message: ";
+            cin >> buffer;
+            cout << endl;
 
+            succes = GetServer(&cS, buffer, PORT, &clnt, &lc);
+        }
         if (closesocket(cS) == SOCKET_ERROR)
             throw SetErrorMsgText("closesocket: ", WSAGetLastError());
 

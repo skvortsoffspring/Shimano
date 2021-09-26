@@ -7,6 +7,7 @@
 
 #define PORT 2000
 #define MAX_MESSAGE 50
+#define PACKET_LOSS                                     // тест потери пакетов
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main()
     serv_addr.sin_addr.s_addr = INADDR_ANY;              //любой адрес для привязки (можно использовать INADDR_LOOPBACK (127.0.0.1)
 
     int size_sock_addr_client = sizeof(client_addr);
-    char buffer[MAX_MESSAGE];                      //буфер ввода
+    char buffer[MAX_MESSAGE];                            //буфер ввода
     int  length_buffer = 0;                              //количество принятых байт
 
     try
@@ -42,27 +43,27 @@ int main()
         cout << "Server UDP " << "port: " << PORT << " address: " << inet_ntoa(serv_addr.sin_addr) << endl;
         do
         {
-            start = clock();
+            //start = clock();
 
             length_buffer = recvfrom(sock_server, buffer, MAX_MESSAGE, 0, (sockaddr *) &client_addr, &size_sock_addr_client);
             if (length_buffer == SOCKET_ERROR)
                 throw  SetErrorMsgText("recv:",WSAGetLastError());
-
+            cout << "!";
             cout << "client (ip: " << inet_ntoa(client_addr.sin_addr) <<
                  ", port: " << client_addr.sin_port << "), message: " << buffer << endl;
 
-
+#ifndef PACKET_LOSS
             length_buffer = sendto(sock_server, (char *)buffer, MAX_MESSAGE, 0, (sockaddr *) &client_addr, size_sock_addr_client);
             if (length_buffer == SOCKET_ERROR)
                 throw SetErrorMsgText("send:", WSAGetLastError());
 
-            stop = clock();
-            cout << "time: " << ((stop - start)) << endl;
 
+            cout << "time: " << ((stop - start)) << endl;
+#endif
+            stop = clock();
             if(strcmp(buffer, "") == 0)                    // условие выхода
                 break;
         } while (true);
-
         if (closesocket(sock_server) == SOCKET_ERROR)
             throw SetErrorMsgText("closesocket: ", WSAGetLastError());
 
