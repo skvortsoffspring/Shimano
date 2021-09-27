@@ -11,7 +11,7 @@
 #define MAX_MESSAGE 50
 #define PORT 2000
 #define EXIT                            // раскомментировать для выключения сервера
-#define PACKET_LOSS                       // тест потери пакетов
+#define PACKET_LOSS                      // тест потери пакетов
 
 
 using namespace std;

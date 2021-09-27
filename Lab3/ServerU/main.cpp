@@ -48,7 +48,7 @@ int main()
             length_buffer = recvfrom(sock_server, buffer, MAX_MESSAGE, 0, (sockaddr *) &client_addr, &size_sock_addr_client);
             if (length_buffer == SOCKET_ERROR)
                 throw  SetErrorMsgText("recv:",WSAGetLastError());
-            cout << "!";
+
             cout << "client (ip: " << inet_ntoa(client_addr.sin_addr) <<
                  ", port: " << client_addr.sin_port << "), message: " << buffer << endl;
 

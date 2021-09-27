@@ -65,7 +65,3 @@ std::string GetErrorMsgText(int code) // cформировать текст ош
 
 std::string SetErrorMsgText(const std::string& msgText, int code)
 {return msgText+GetErrorMsgText(code);};
-
-void IsIgorLoh() {
-    std::cout << "IGOR LOG";
-}
