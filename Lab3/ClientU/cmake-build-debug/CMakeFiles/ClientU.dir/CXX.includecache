@@ -19,4 +19,6 @@ Error.h
 D:/GitHub/Shimano/Lab3/ClientU/Error.h
 cstdlib
 -
+synchapi.h
+-
 

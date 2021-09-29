@@ -5,14 +5,15 @@
 #include "Error.h"
 #include <cstdlib>
 
-#define COUNT 10000
-#define LOCALHOST                       // закомментировать для использования адреса (не петли)
-#define LOCAL_ADDRESS "192.168.0.100"   // адрес компьютера в локальной сети
+#define COUNT 10000                     // quantity of packages for sending
+#define LOCALHOST                       // use localhost
+#define LOCAL_ADDRESS "192.168.0.100"   // local address PC
 #define MAX_MESSAGE 50
-#define PORT 2000
-#define EXIT                            // раскомментировать для выключения сервера
-#define PACKET_LOSS                      // тест потери пакетов
-
+#define MESSAGE "Hello from ClientU "
+#define PORT 2000                       // port
+#define EXIT                            // uncomment for send the message for close the server
+#define PACKET_LOSS                     // if def, packages will be lost
+#include <synchapi.h>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ int main()
     SOCKET cS;
 
     SOCKADDR_IN clnt;
-    memset(&clnt,0,sizeof(clnt));   // обнулить память
+    memset(&clnt,0,sizeof(clnt));   // mem zero
 
     clnt.sin_family = AF_INET;
     clnt.sin_port = htons(PORT);
@@ -33,15 +34,15 @@ int main()
 #endif
 
 #ifndef LOCALHOST
-    serv.sin_addr.s_addr = inet_addr(LOCAL_ADDRESS);
+    clnt.sin_addr.s_addr = inet_addr(LOCAL_ADDRESS);
 #endif
 
     int lc = sizeof(clnt);
-    char ibuf[50];                              //буфер ввода
-    int  lb = 0;                                //количество принятых байт
-    char obuf[50];                              //буфер вывода
-    int  lobuf = 0;                             //количество принятых байт
-    char buffer[20];                            //для функции itoa
+    char ibuf[50];                              // buffer for input
+    int  lb = 0;                                // input buffer length
+    char obuf[50];                              // buffer for output
+    int  lobuf = 0;                             // output buffer length
+    char buffer[20];                            // array for func concat (itoa)
 
     try
     {
@@ -51,19 +52,21 @@ int main()
         if ((cS = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET)
             throw SetErrorMsgText("socket: ", WSAGetLastError());
 
-        cout << "Will " <<  COUNT <<  "send packages" << endl;
+        cout << "Will be send " <<  COUNT <<  " packages" << endl;
 
         for (int i = 1; i <= COUNT; i++)
         {
 
-            strcpy(obuf, "Hello from ClientU ");
+            strcpy(obuf, MESSAGE);
             strcat(obuf, itoa(i, buffer,10));
 
 
             lobuf = sendto(cS, (char *)obuf, MAX_MESSAGE, 0, (sockaddr *) &clnt, lc);
             if (lobuf == SOCKET_ERROR)
                 throw SetErrorMsgText("send:", WSAGetLastError());
-#ifndef  PACKET_LOSS
+
+#ifndef  PACKET_LOSS      //для потери пакетов не должен ожидать приема
+
             lb = recvfrom(cS, ibuf, MAX_MESSAGE, 0, (sockaddr *) &clnt, &lc);
             if (lb == SOCKET_ERROR)
                 throw  SetErrorMsgText("recv:",WSAGetLastError());
@@ -75,6 +78,8 @@ int main()
 
 
 #ifdef EXIT
+        Sleep(5000);                    // waiting for the server
+
         strcpy(obuf, "");
         lobuf = sendto(cS, (char *)obuf, MAX_MESSAGE, 0, (sockaddr *) &clnt, lc);
         if (lobuf == SOCKET_ERROR)

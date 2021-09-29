@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
 #include "Winsock2.h"
-#pragma comment(lib, "WS2_32.lib")
 #include "Error.h"
 #include <ctime>
+#pragma comment(lib, "WS2_32.lib")
 
 using namespace std;
 
@@ -28,6 +28,7 @@ int main()
     int libuf = 0;                              //количество принятых байт
     int lobuf = 0;                              //количество отправленных байт
     bool exit = false;
+
     try
     {
         if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0)      // инициализация библиотеки (MAKEWORD информация о версии, т.е используем сокет 2.0)
@@ -39,20 +40,16 @@ int main()
         if (bind(sS, (LPSOCKADDR)&serv, sizeof(serv)) == SOCKET_ERROR)          // связываем сокет и данные структуры SOCKADDR_IN
             throw SetErrorMsgText("bind: ", WSAGetLastError());
 
-        if (listen(sS, SOMAXCONN) == SOCKET_ERROR)                          // устанавливаем сокет в режим прослуживания (сокет, SOMAXCONN (2147483647) - количество возможных
-            throw SetErrorMsgText("listen: ", WSAGetLastError());
-
         do
         {
             cout << "I listen!" << endl;
             if ((cS = accept(sS, (sockaddr*)&clnt, &lclnt)) == INVALID_SOCKET)      //метод для ожидания подключения клиентов (сокет, структура параметров подключения, размер структуры SOCKADDR_IN)
                 throw SetErrorMsgText("accept: ", WSAGetLastError());
 
-            cout << "adress: " << inet_ntoa(clnt.sin_addr) << ", port: " << clnt.sin_port << endl;
+            //cout << "adress: " << inet_ntoa(clnt.sin_addr) << ", port: " << clnt.sin_port << endl;
 
             while (true)
             {
-
                 start = clock();                                                                //начало измерения
                 if ((libuf = recv(cS, ibuf, sizeof(ibuf), 0)) == SOCKET_ERROR)               //получение сообщения (сокет клиента, буффер ввода, индикатор особого режима маршрутизатора)
                     throw SetErrorMsgText("recv: ", WSAGetLastError());

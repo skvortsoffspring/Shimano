@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include "Winsock2.h"
+#include "winsock2.h"
 //...................................................................
 std::string GetErrorMsgText(int code) // cформировать текст ошибки
 {
