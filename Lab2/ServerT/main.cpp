@@ -60,6 +60,7 @@ int main()
                     throw SetErrorMsgText("send: ", WSAGetLastError());
 
                 cout << ibuf << endl;
+
                 if(exit) break;
                 if (strcmp(ibuf, "") == 0){
                     exit = true;

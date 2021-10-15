@@ -1,11 +1,11 @@
 #include <iostream>
 #include "Winsock2.h"
 #include "../headers/Error.h"
-#define SERVER_NAME "DESKTOP-SN48F5O"
+#define SERVER_NAME "DESKTOP-SN48F5O" // static host name
 #define MAX_MESSAGE 50
 
 
-bool  GetServerByName(SOCKET *sock,char* call, short port,SOCKADDR_IN * servaddr, int* flen){
+bool  GetServerByName(SOCKET *sock,char *name, char* call, short port,SOCKADDR_IN * servaddr, int* flen){
     int  lenghtbuffer = 0;                                //количество принятых байт
     char buffer[MAX_MESSAGE];
 
@@ -14,7 +14,10 @@ bool  GetServerByName(SOCKET *sock,char* call, short port,SOCKADDR_IN * servaddr
 
     struct hostent *remoteHost;
 
-    if ((remoteHost = gethostbyname(SERVER_NAME)) == NULL)
+    if(name == nullptr)
+        name = (char*) SERVER_NAME;
+
+    if ((remoteHost = gethostbyname(name)) == nullptr)
         throw SetErrorMsgText("Error: server not found.", 0);
 
     servaddr->sin_addr.s_addr = *(u_long *) remoteHost->h_addr_list[0];

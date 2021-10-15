@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/GitHub/Shimano/Lab7/ServerMS/error.h
+
+D:/GitHub/Shimano/Lab7/ServerMS/main.cpp
+iostream
+-
+windows.h
+-
+ctime
+-
+error.h
+D:/GitHub/Shimano/Lab7/ServerMS/error.h
+

@@ -1,0 +1,3 @@
+C:\Users\garik\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\212.5284.51\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\ServerMS.dir/objects.a
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\ServerMS.dir/objects.a @CMakeFiles\ServerMS.dir\objects1.rsp
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  -static-libstdc++ -static-libgcc -static -g -Wl,--whole-archive CMakeFiles\ServerMS.dir/objects.a -Wl,--no-whole-archive -o ServerMS.exe -Wl,--out-implib,libServerMS.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ServerMS.dir\linklibs.rsp

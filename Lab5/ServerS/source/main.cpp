@@ -1,7 +1,9 @@
 #include <string>
 #include <iostream>
 #include "Winsock2.h"
+
 #pragma comment(lib, "WS2_32.lib")
+
 #include "../headers/error.h"
 #include "../headers/sendreceive.h"
 #include "../headers/service.h"
@@ -30,8 +32,9 @@ int main()
     {
         initaddr(&serv_addr, PORT, INADDR_ANY, AF_INET);
         init(&sock_serv, &wsaData, &serv_addr, &lc);
+
         cout << "Listen" << endl;
-        cout << gethostbyname(hostname)->h_name;
+        cout << gethostbyname(hostname)->h_name << endl;//имя хоста
 
         while (true){
             iSreceiving = GetRequestFromClient(sock_serv, ibuf, 2000, &client_addr, &lc );

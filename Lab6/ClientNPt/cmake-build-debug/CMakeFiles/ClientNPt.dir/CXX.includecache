@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/GitHub/Shimano/Lab6/ClientNPt/error.h
+
+D:/GitHub/Shimano/Lab6/ClientNPt/main.cpp
+windows.h
+-
+conio.h
+-
+error.h
+D:/GitHub/Shimano/Lab6/ClientNPt/error.h
+iostream
+-
+

@@ -4,6 +4,7 @@
 
 bool  GetServerByName(
         SOCKET*          sock,
+        char*            name, //host name of the server
         char*            call, //[in] позывной сервера
         short            port, //[in] номер порта сервера
         SOCKADDR_IN*     from, //[out] указатель на SOCKADDR_IN

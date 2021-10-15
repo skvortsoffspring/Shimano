@@ -14,15 +14,17 @@ D:/GitHub/Shimano/Lab5/ServerS/headers/sendreceive.h
 
 D:/GitHub/Shimano/Lab5/ServerS/headers/service.h
 
-D:/GitHub/Shimano/Lab5/ServerS/source/sendreceive.cpp
+D:/GitHub/Shimano/Lab5/ServerS/source/main.cpp
+string
+-
 iostream
 -
-../headers/error.h
-D:/GitHub/Shimano/Lab5/ServerS/headers/error.h
 Winsock2.h
 D:/GitHub/Shimano/Lab5/ServerS/source/Winsock2.h
-../headers/service.h
-D:/GitHub/Shimano/Lab5/ServerS/headers/service.h
+../headers/error.h
+D:/GitHub/Shimano/Lab5/ServerS/headers/error.h
 ../headers/sendreceive.h
 D:/GitHub/Shimano/Lab5/ServerS/headers/sendreceive.h
+../headers/service.h
+D:/GitHub/Shimano/Lab5/ServerS/headers/service.h
 

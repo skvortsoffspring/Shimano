@@ -13,7 +13,7 @@
 #define PORT 2000
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
     WSADATA wsaData;
     SOCKET cS;
@@ -43,7 +43,7 @@ int main()
             cin >> buffer;
             cout << endl;
 
-            succes = GetServerByName(&cS, buffer, PORT, &clnt, &lc);
+            succes = GetServerByName(&cS, argv[1], buffer, PORT, &clnt, &lc);
         }
         if (closesocket(cS) == SOCKET_ERROR)
             throw SetErrorMsgText("closesocket: ", WSAGetLastError());

@@ -54,6 +54,7 @@ int main()
                 throw SetErrorMsgText("recv: ", WSAGetLastError());
             cout << ibuf << endl;
         }
+
         string str = "";
         if ((lobuf = send(cC, str.c_str(), 1, 0)) == SOCKET_ERROR)
             throw SetErrorMsgText("send: ", WSAGetLastError());

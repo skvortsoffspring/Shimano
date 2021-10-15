@@ -1,0 +1,3 @@
+D:/GitHub/Shimano/Lab6/ClientNPct/cmake-build-debug/CMakeFiles/ClientNPct.dir
+D:/GitHub/Shimano/Lab6/ClientNPct/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/GitHub/Shimano/Lab6/ClientNPct/cmake-build-debug/CMakeFiles/rebuild_cache.dir

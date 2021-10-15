@@ -31,6 +31,7 @@ int main()
     int  length_buffer = 0;
     int count_received_packs = 0;
     bool first_pause = true;
+
     try
     {
         if (WSAStartup(MAKEWORD(2, 0), &wsaData) != 0)

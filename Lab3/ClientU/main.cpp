@@ -20,7 +20,6 @@ using namespace std;
 int main()
 {
     WSADATA wsaData;
-
     SOCKET cS;
 
     SOCKADDR_IN clnt;

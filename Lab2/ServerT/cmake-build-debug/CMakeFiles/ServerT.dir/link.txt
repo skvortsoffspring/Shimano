@@ -1,3 +1,3 @@
-C:\Users\Skvortsoff\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\212.5080.54\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\ServerT.dir/objects.a
+C:\Users\garik\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\212.5284.51\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\ServerT.dir/objects.a
 C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\ServerT.dir/objects.a @CMakeFiles\ServerT.dir\objects1.rsp
 C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\ServerT.dir/objects.a -Wl,--no-whole-archive -o ServerT.exe -Wl,--out-implib,libServerT.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ServerT.dir\linklibs.rsp
